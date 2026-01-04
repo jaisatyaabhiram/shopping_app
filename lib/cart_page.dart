@@ -26,10 +26,45 @@ class CartPage extends StatelessWidget {
             subtitle: Text("size ${cartitem['size'].toString()}"),
             trailing: IconButton(
               onPressed: () {
-                Provider.of<CartProvider>(
-                  context,
-                  listen: false,
-                ).removeProduct(cartitem);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        "Delete item",
+                        style: TextTheme.of(context).titleMedium,
+                      ),
+                      content: Text(
+                        "Are you sure you want to delete this item?",
+                        style: TextTheme.of(context).bodyMedium,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Provider.of<CartProvider>(
+                              context,
+                              listen: false,
+                            ).removeProduct(cartitem);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "Yes",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "No",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               icon: Icon(Icons.delete),
               color: Colors.red,
