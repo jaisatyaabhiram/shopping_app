@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'cart_provider.dart';
+import '../providers/cart_provider.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -30,6 +30,7 @@ class CartPage extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
+                      scrollable: false,
                       title: Text(
                         "Delete item",
                         style: TextTheme.of(context).titleMedium,
@@ -58,7 +59,7 @@ class CartPage extends StatelessWidget {
                           },
                           child: Text(
                             "No",
-                            style: TextStyle(color: Colors.red),
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                       ],
