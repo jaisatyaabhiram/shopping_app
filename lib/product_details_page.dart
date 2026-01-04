@@ -30,6 +30,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         "imageUrl": widget.product['imageUrl'].toString(),
         "company": widget.product['company'].toString(),
       });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Added to cart")));
     } else {
       ScaffoldMessenger.of(
         context,
