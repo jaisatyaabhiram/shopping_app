@@ -22,6 +22,7 @@ class _ProductListPageState extends State<ProductListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
       borderRadius: BorderRadius.horizontal(left: Radius.circular(30)),
@@ -75,10 +76,8 @@ class _ProductListPageState extends State<ProductListPage> {
                           : Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
-                        
                       ),
                       side: BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
-                      
 
                       padding: EdgeInsets.symmetric(
                         horizontal: 20,
@@ -91,30 +90,63 @@ class _ProductListPageState extends State<ProductListPage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return ProductDetailsPage(product: products[index]);
+            child: size.width > 600
+                ? GridView.builder(
+                    itemCount: products.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 2,
+                    ),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailsPage(
+                                  product: products[index],
+                                );
+                              },
+                            ),
+                          );
                         },
-                      ),
-                    );
-                  },
-                  child: ProductCard(
-                    title: products[index]['title'].toString(),
-                    price: products[index]['price'] as double,
-                    image: products[index]['imageUrl'].toString(),
-                    backgroundcolor: index.isEven
-                        ? Color.fromRGBO(216, 240, 253, 1)
-                        : Color.fromRGBO(245, 247, 249, 1),
+                        child: ProductCard(
+                          title: products[index]['title'].toString(),
+                          price: products[index]['price'] as double,
+                          image: products[index]['imageUrl'].toString(),
+                          backgroundcolor: index.isEven
+                              ? Color.fromRGBO(216, 240, 253, 1)
+                              : Color.fromRGBO(245, 247, 249, 1),
+                        ),
+                      );
+                    },
+                  )
+                : ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailsPage(
+                                  product: products[index],
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        child: ProductCard(
+                          title: products[index]['title'].toString(),
+                          price: products[index]['price'] as double,
+                          image: products[index]['imageUrl'].toString(),
+                          backgroundcolor: index.isEven
+                              ? Color.fromRGBO(216, 240, 253, 1)
+                              : Color.fromRGBO(245, 247, 249, 1),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
       ),
