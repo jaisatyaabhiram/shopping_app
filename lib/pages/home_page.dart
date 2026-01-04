@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
         unselectedFontSize: 0,
         iconSize: 35,
         currentIndex: currentIndex,
+        
         onTap: (index) {
           setState(() {
             currentIndex = index;

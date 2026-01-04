@@ -75,8 +75,10 @@ class _ProductListPageState extends State<ProductListPage> {
                           : Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
+                        
                       ),
                       side: BorderSide(color: Color.fromRGBO(225, 225, 225, 1)),
+                      
 
                       padding: EdgeInsets.symmetric(
                         horizontal: 20,
